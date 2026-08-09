@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "topic": "Binary search and its precondition",
+    "text": "Binary search is a method for finding a value by repeatedly eliminating half of the remaining search space. For a normal array search, the array must be sorted; more generally, the property you test must change in one consistent direction, which is called monotonicity."
+  },
+  {
+    "id": 2,
+    "topic": "Basic binary search walkthrough",
+    "text": "Start with a low position and a high position representing the current search range, then examine the middle position. If the middle value equals the target, the search is complete; if it is smaller, search the right half, and if it is larger, search the left half by moving the corresponding boundary."
+  },
+  {
+    "id": 3,
+    "topic": "Why binary search is log n",
+    "text": "Each binary search step removes roughly half of the remaining elements from consideration. Halving repeatedly takes about log n steps to reduce n elements to one, so the running time is logarithmic in the size of the search space."
+  },
+  {
+    "id": 4,
+    "topic": "Off-by-one and midpoint bugs",
+    "text": "Binary search commonly fails because the boundary convention is inconsistent, such as mixing less-than with less-than-or-equal conditions. The midpoint should be calculated in an overflow-safe way, and every iteration must move low or high past the midpoint when that midpoint has been ruled out; otherwise the loop can become infinite."
+  },
+  {
+    "id": 5,
+    "topic": "Lower bound",
+    "text": "A lower bound finds the first position whose value is greater than or equal to the target. When the middle value is already large enough, keep that position as a possible answer and continue searching to the left; otherwise, move right."
+  },
+  {
+    "id": 6,
+    "topic": "Upper bound",
+    "text": "An upper bound finds the first position whose value is strictly greater than the target, which is also one position after the last occurrence of the target. When the middle value is less than or equal to the target, move right; otherwise, keep searching on the left."
+  },
+  {
+    "id": 7,
+    "topic": "Duplicate elements",
+    "text": "Duplicates do not prevent binary search, but they change what a successful search means. If you need any occurrence, you can stop when you find the target, while finding the first or last occurrence requires continuing the search even after a match."
+  },
+  {
+    "id": 8,
+    "topic": "Rotated sorted array",
+    "text": "A rotated sorted array is sorted except that a prefix has been moved to the end, creating two sorted regions. At each step, determine which half around the middle is sorted, then check whether the target belongs inside that sorted half; otherwise search the other half."
+  },
+  {
+    "id": 9,
+    "topic": "Binary search on the answer",
+    "text": "Binary search on the answer means searching through possible numerical answers instead of searching for a value inside an array. You choose a candidate answer, test whether it is feasible, and use that result to eliminate half of the possible answers."
+  },
+  {
+    "id": 10,
+    "topic": "Recognizing binary search on answer",
+    "text": "Look for an optimization problem where the answer is a number and you can efficiently test whether a candidate answer works. Binary search applies when that feasibility test is monotonic, meaning once candidates become feasible, all larger candidates remain feasible, or the reverse for a maximization problem."
+  },
+  {
+    "id": 11,
+    "topic": "Minimum shipping capacity example",
+    "text": "Suppose packages must be shipped in a fixed number of days while preserving their order, and you want the minimum daily capacity. Try a candidate capacity and greedily count how many days are required; if it fits within the allowed days, try a smaller capacity, and if it does not, try a larger one."
+  },
+  {
+    "id": 12,
+    "topic": "Floating point binary search",
+    "text": "Binary search can also approximate a real-valued answer, such as a square root or a minimum possible distance. Instead of stopping when the integer search range becomes empty, continue until the interval is sufficiently small or for a fixed number of iterations, because real numbers do not have a discrete final position."
+  },
+  {
+    "id": 13,
+    "topic": "Binary search on a two-dimensional matrix",
+    "text": "If a matrix is sorted row by row and every element in one row is no greater than the first element of the next row, it can be treated as one sorted sequence. Binary search can then use a virtual one-dimensional index and convert each position into its corresponding row and column."
+  },
+  {
+    "id": 14,
+    "topic": "Binary search versus linear search",
+    "text": "Linear search may inspect every element, giving a running time proportional to n in the worst case. Binary search needs only logarithmically many comparisons on a suitable sorted or monotonic search space, but it requires the necessary ordering property and is not automatically better for every data structure or problem."
+  },
+  {
+    "id": 15,
+    "topic": "When binary search is wrong",
+    "text": "Binary search is the wrong choice when the data is unsorted and there is no other monotonic structure to exploit. It is also wrong when a feasibility condition can switch between true and false multiple times, because eliminating half the search space would then be unjustified."
+  },
+  {
+    "id": 16,
+    "topic": "Choosing integer search boundaries",
+    "text": "For integer binary search, the initial low and high values must cover every possible valid answer or index. For an array, they usually represent the first and last valid positions; for answer-based search, they come from the smallest and largest values the answer could logically have."
+  },
+  {
+    "id": 17,
+    "topic": "Binary search invariants",
+    "text": "A binary search is easier to reason about when you define what the current low and high boundaries guarantee. Every update should preserve that guarantee while removing values that cannot be answers, so when the search finishes, the remaining boundary has the required meaning."
+  },
+  {
+    "id": 18,
+    "topic": "First true and last true patterns",
+    "text": "Many binary search problems can be expressed as finding the first position where a condition becomes true or the last position where it remains true. This viewpoint unifies tasks such as lower bounds and answer-based optimization, because the important structure is the single transition between false and true."
+  },
+  {
+    "id": 19,
+    "topic": "Space complexity of binary search",
+    "text": "An iterative binary search usually uses constant extra space because it needs only a few boundary variables. A recursive implementation can use logarithmic stack space because each recursive call creates another level of the call stack, even though the number of search steps remains logarithmic."
+  },
+  {
+    "id": 20,
+    "topic": "Binary search correctness",
+    "text": "Binary search is correct only when every discarded part of the search space is proven unable to contain the desired answer. The key reasoning is that the ordering or monotonic property lets the comparison at the midpoint safely eliminate one entire half without losing a valid answer."
+  }
+]
