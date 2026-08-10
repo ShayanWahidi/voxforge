@@ -151,7 +151,7 @@ const SpeechRecognitionComponent = () => {
   return (
     <div className="shell">
       <header className="app-header">
-        <h1 className="app-title">Voxforge</h1>
+        <h1 className="app-title">FRIZA</h1>
         <div className="header-actions">
           <button
             className={`mic-btn${listening && !micDisabled ? ' listening' : ''}${
