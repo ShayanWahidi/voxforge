@@ -1,13 +1,5 @@
-import path from 'path'
-import { fileURLToPath } from 'url'
-import dotenv from 'dotenv'
-import express from 'express'
-import cors from 'cors'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import { QdrantClient } from '@qdrant/js-client-rest'
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-dotenv.config({ path: path.join(__dirname, '.env.local'), override: true })
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
 const embedModel = genAI.getGenerativeModel({ model: 'gemini-embedding-001' })
@@ -24,13 +16,8 @@ const qdrant = new QdrantClient({
 
 const RIME_URL = 'https://users.rime.ai/v1/rime-tts'
 const COLLECTION = 'dsa_notes'
-const PORT = 3001
 
-const app = express()
-app.use(cors({ origin: 'http://localhost:5173' }))
-app.use(express.json({ limit: '10mb' }))
-
-app.post('/api/ask', async (req, res) => {
+export default async function handler(req, res) {
   try {
     const requestStart = Date.now()
     const { transcript, history = [] } = req.body || {}
@@ -122,8 +109,4 @@ Student question: ${transcript}`
     console.error('[ERROR] /api/ask failed:', err)
     res.status(500).json({ error: err.message })
   }
-})
-
-app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`)
-})
+}
