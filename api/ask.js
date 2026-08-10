@@ -4,7 +4,7 @@ import { QdrantClient } from '@qdrant/js-client-rest'
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
 const embedModel = genAI.getGenerativeModel({ model: 'gemini-embedding-001' })
 const chatModel = genAI.getGenerativeModel({
-  model: 'gemini-flash-latest',
+  model: 'gemini-2.5-flash',
   systemInstruction:
     'You are a spoken DSA tutor answering questions about binary search. Answer briefly and clearly in 2-4 sentences using the provided notes, since this will be read aloud. If the notes do not cover it, say so honestly instead of guessing.',
 })
